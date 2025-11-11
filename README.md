@@ -57,51 +57,11 @@ Affordable subscription plans.
 
 Offline access for low-connectivity areas.
 
-Community-driven learning and tutor engagement.
-
----
-## Traction & Roadmap
-
-Current Stage: Prototype and content development phase.
-Next Steps:
-
-Beta testing in select secondary schools.
-
-Launch full version within 6 months.
-
-Reach 100,000 active users in the first year.
-
-Expand to other African countries within 3 years.
-
-Business / Revenue Model
-
-Subscription Plans (monthly or yearly).
-
-Pay-per-course access.
-
-Advertising partnerships (educational brands).
-
-Affiliate programs for schools and tutors.
-
----
-## Go-to-Market Strategy
-
-Collaborate with secondary schools and tutoring centers.
-
-Social media campaigns targeting students and parents.
-
-Referral bonuses for new users.
-
-Partnerships with telecom providers for data-friendly access.
-
----
-## Our Ask
-
-We seek ₦10 million (approx. $6,500) in seed funding to develop the full platform, onboard 50 tutors, market the product nationwide, and integrate payment and analytics systems.
-
 ----
 ## The Team
 
 Founder & CEO: Oseni Usman Product designer and education innovator.
+
 Tel: 09078059440
+
 email: oseniusmanrotimi@gmail.com
