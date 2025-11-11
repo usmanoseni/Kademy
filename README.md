@@ -60,7 +60,7 @@ Offline access for low-connectivity areas.
 ----
 ## The Team
 
-Founder & CEO: Oseni Usman Product designer and education innovator.
+Founder & CEO: Oseni Usman Rotimi (Hustech) - Product designer and education innovator.
 
 Tel: 09078059440
 
