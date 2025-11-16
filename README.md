@@ -9,6 +9,10 @@ Many secondary school students in Nigeria and across Africa struggle to access q
 
 KADEMY provides an interactive e-learning platform designed specifically for secondary school students preparing for WAEC, NECO, JAMB, and similar examinations. The platform offers video lessons, digital resources, mock tests, and progress tracking tools—all in one user-friendly interface accessible anytime, anywhere.
 
+### Pitch Desk
+below is the link for the pitch desk:
+https://www.canva.com/design/DAG4fvSV5tA/9JWie30PhanbadFIkhukdg/edit?utm_content=DAG4fvSV5tA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
 ---
 ## Product
 
