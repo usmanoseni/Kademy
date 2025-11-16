@@ -1,71 +1,115 @@
 # Kademy Platform
----
-## Problem
 
-Many secondary school students in Nigeria and across Africa struggle to access quality educational resources and qualified tutors for exam preparation. Traditional classroom learning often lacks flexibility, personalized support, and modern teaching materials—leading to poor performance in major exams like WAEC, NECO, and JAMB.
+An interactive e-learning platform designed for secondary school students preparing for WAEC, NECO, and JAMB examinations. The platform offers video lessons, digital resources, mock tests, and progress tracking tools.
 
----
-## Solution
+## Overview
 
-KADEMY provides an interactive e-learning platform designed specifically for secondary school students preparing for WAEC, NECO, JAMB, and similar examinations. The platform offers video lessons, digital resources, mock tests, and progress tracking tools—all in one user-friendly interface accessible anytime, anywhere.
+**KADEMY** provides:
 
-### Pitch Desk
-below is the link for the pitch desk:
-https://www.canva.com/design/DAG4fvSV5tA/9JWie30PhanbadFIkhukdg/edit?utm_content=DAG4fvSV5tA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+- Video Tutorials from verified and experienced tutors
+- Practice Questions covering WAEC, NECO, and JAMB syllabuses
+- Resource Library with notes, past questions, and downloadable materials
+- Performance Analytics with personalized dashboards
 
 ---
-## Product
 
-Video Tutorials: Delivered by verified and experienced tutors.
+## Project Structure
 
-Practice Questions: Covering WAEC, NECO, and JAMB syllabuses.
-
-Resource Library: Notes, past questions, and downloadable materials.
-
-Performance Analytics: Personalized dashboards showing student progress.
-
----
-## Target Market
-
-Secondary school students (SS1–SS3).
-
-Private and public secondary schools.
-
-Parents seeking affordable learning solutions for their children.
-
-Tutors looking to share and monetize their teaching resources.
+```
+Kademy/
+├── Backend/
+│   ├── server/
+│   │   ├── server.js
+│   │   ├── config/
+│   │   │   └── db.js
+│   │   ├── models/
+│   │   │   ├── User.js
+│   │   │   ├── Post.js
+│   │   │   └── department.js
+│   │   └── router/
+│   └── package.json
+└── README.md
+```
 
 ---
-## Market Size
-Nigeria alone has over 12 million secondary school students, with over 1.7 million sitting for WAEC and 1.5 million for JAMB annually. Across Africa, this market expands to over 50 million students—creating a large opportunity for scalable growth.
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- MongoDB (or configured database)
 
 ---
-## Competitors
 
-Edusko
+## How to Run
 
-ULesson
+### Backend Setup
 
-Pass.ng
+1. **Navigate to the Backend directory:**
 
-MySchool.ng
+   ```bash
+   cd Backend
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables:**
+   Create a `.env` file in the `Backend` directory with the following:
+
+   ```
+   PORT=5000
+   DB_URI=<your-database-uri>
+   NODE_ENV=development
+   ```
+
+4. **Start the server:**
+
+   ```bash
+   npm start
+   ```
+
+   The server should now be running on `http://localhost:5000`
 
 ---
-## Competitive Advantage
 
-Simple and intuitive user interface for both tutors and students.
+## How to Test
 
-Focused on local curricula (WAEC, NECO, JAMB).
+### Backend Testing
 
-Affordable subscription plans.
+1. **Unit Tests:**
 
-Offline access for low-connectivity areas.
+   ```bash
+   npm test
+   ```
 
-----
-## The Team
+2. **API Testing with Postman:**
 
-Founder & CEO: Oseni Usman Rotimi (Hustech) - Product designer and education innovator.
+   - Import the API endpoints from the `router/` directory
+   - Test each endpoint with sample data
 
-Tel: 09078059440
+3. **Database Connection:**
+   ```bash
+   npm run test:db
+   ```
 
-email: oseniusmanrotimi@gmail.com
+---
+
+## Key Features
+
+- Simple and intuitive user interface
+- Focused on local curricula (WAEC, NECO, JAMB)
+- Affordable subscription plans
+- Offline access support for low-connectivity areas
+
+---
+
+## Contact
+
+**Founder & CEO:** Oseni Usman Rotimi (Hustech)
+
+- Tel: 09078059440
+- Email: oseniusmanrotimi@gmail.com
