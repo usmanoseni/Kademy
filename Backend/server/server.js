@@ -8,6 +8,11 @@ const cors = require('cors');
 //load env variables
 require('dotenv').config();
 
+//Root route
+app.get('/', (req, res) => {
+    res.send("my server Api is running");
+})
+
 // initailizing express app
 const app = express();
 const PORT = process.env.PORT || 5000;
