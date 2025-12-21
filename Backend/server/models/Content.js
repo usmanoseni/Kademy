@@ -29,6 +29,16 @@ const ContentSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
+    content_video: {
+        type: String,
+        trim: true,
+        default: null,
+    },
+    content_doc: {
+        type: String,
+        trim: true,
+        default: null,
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Content', ContentSchema)
