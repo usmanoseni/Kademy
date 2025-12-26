@@ -1,7 +1,6 @@
 const express = require('express');
-const Content = require('../models/Content')
+const Content = require('../models/Content');
 const {body, validationResult} = require('express-validator');
-const Tutor = require('../models/Tutor')
 const router = express.Router();
 
 // get all contents
@@ -13,19 +12,19 @@ router.get('/', async (req, res, next) => {
     catch (err) {
         next(err)
     }
-})
+});
 
 // get all content posted by the tutor 
 router.get('/:id', async (req, res, next) => {
     try {
         const userId = req.params.id;
-        const findUserContent = await Content.find({tutor_id:userId})
+        const findUserContent = await Content.find({ tutor_id: userId })
         res.status(200).json(findUserContent)
     }
     catch (err) {
         next(err)
-    }  
-})
+    }
+});
 
 //get content by search query from the  words contain in the title 
 router.get('/', async (req, res, next) => {
@@ -37,7 +36,7 @@ router.get('/', async (req, res, next) => {
             {
                 "$or": [
                     { content_title: { $regex: search_query, $options: 'i' } },
-                    { subject_id: mongoose.Types.ObjectId(search_query), $options: 'i' }
+                    { subject_name: search_query, $options: 'i' }
                 ]
             }
         )
@@ -71,9 +70,9 @@ router.post('/',
         } catch (err) {
             next(err)
         }
-    });
+});
 
-    // delete content by id
+// delete content by id
 router.delete('/:id', async (req, res, next) => {
     try {
         const contentId = req.params.id;
@@ -85,6 +84,6 @@ router.delete('/:id', async (req, res, next) => {
     } catch (err) {
         next(err);
     }
-});
+}); 
 
 module.exports = router;

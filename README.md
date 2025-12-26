@@ -19,15 +19,24 @@ An interactive e-learning platform designed for secondary school students prepar
 Kademy/
 ├── Backend/
 │   ├── server/
-│   │   ├── server.js
+│   │   ├── server.js (main Express app entry point)
 │   │   ├── config/
-│   │   │   └── db.js
+│   │   │   └── db.js (MongoDB connection)
 │   │   ├── models/
-│   │   │   ├── User.js
-│   │   │   ├── Post.js
-│   │   │   └── department.js
+│   │   │   ├── Tutor.js (tutor profile schema with validation)
+│   │   │   ├── Student.js (student profile schema with validation)
+│   │   │   ├── Subject.js (subject schema with validation)
+│   │   │   ├── Qualification.js (qualifications with validation)
+│   │   │   ├── Content.js
+│   │   │   └── Post.js
 │   │   └── router/
-│   └── package.json
+│   │       ├── authRouter.js
+│   │       ├── tutorRouter.js
+│   │       ├── studentsRouter.js
+│   │       └── contentRouter.js
+│   ├── .env (environment variables)
+│   ├── package.json
+│   └── node_modules/
 └── README.md
 ```
 
@@ -36,8 +45,9 @@ Kademy/
 ## Prerequisites
 
 - Node.js (v14 or higher)
-- npm or yarn
-- MongoDB (or configured database)
+- npm (comes with Node.js)
+- MongoDB (Atlas or local instance)
+- Postman or similar API testing tool (optional)
 
 ---
 
@@ -69,7 +79,7 @@ Kademy/
 4. **Start the server:**
 
    ```bash
-   npm start
+   npm run dev
    ```
 
    The server should now be running on `http://localhost:5000`

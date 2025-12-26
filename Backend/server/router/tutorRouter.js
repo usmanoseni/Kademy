@@ -38,10 +38,25 @@ router.post('/',
         }
     });
 
+//update the tutor
+router.put('/:id', async (req, res, next) => {
+    try {
+        const tutorIndex = Tutor.findIndex((user) => user.id == req.params.id)
+        if (tutorIndex) {
+            const updateTutor = await { ...Tutor[tutorIndex], ...req.body };
+            Tutor[tutorIndex] = updateTutor 
+            res.status(201).json(updateTutor)
+        } else {
+            res.staus(201).json({ msg: "tutor not found" })
+        }
+    } catch (err) {
+        next(err)
+    }
+}) 
 // delete tutor by id
 router.delete('/:id', async (req, res, next) => { 
     try {
-        const userId = req.params.id;
+        const userId = Tutor.findIndex((user)=>user.id==req.params.id);
         const deletedTutor = await Tutor.findByIdAndDelete(userId);
         if (!deletedTutor) { 
             res.status(404).json({ message: 'Tutor not found' });
