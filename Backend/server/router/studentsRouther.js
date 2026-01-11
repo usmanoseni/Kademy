@@ -1,6 +1,9 @@
 const express = require('express');
 const Student = require('../models/Student')
 const router = express.Router();
+const { body, validationResult } = require('express-validator');
+const hashpassword = require('../utlis/hashPassword');
+
 
 // get all students by id
 router.get('/:id', async (req, res, next) => {
@@ -18,12 +21,14 @@ router.get('/:id', async (req, res, next) => {
 router.post('/',
     [
         body('Fname').not().isEmpty().withMessage('Name is required'),
-        body('Lname').not().isEmpty().withMessage('Name is required'),
         body('email').isEmail().withMessage('Valid email is required'),
         body('profile_img').optional().isString().withMessage('Profile image must be a string'),
         body('address').optional().isString().withMessage('Address must be a string'),
         body('phone_no').optional().isString().withMessage('Phone number must be a string'),
         body('birth_date').optional().isISO8601().toDate().withMessage('Birth date must be a valid date'),
+        body('state').optional().isString().withMessage('State must be a string'),
+        body('country').optional().isString().withMessage('Country must be a string'),
+        body('enrolled_courses').not().isEmpty().withMessage('Course type is required'),
     ],
     async (req, res, next) => {
         try {
@@ -44,12 +49,14 @@ router.post('/',
 router.put('/:id',
         [
         body('Fname').not().isEmpty().withMessage('Name is required'),
-        body('Lname').not().isEmpty().withMessage('Name is required'),
         body('email').isEmail().withMessage('Valid email is required'),
         body('profile_img').optional().isString().withMessage('Profile image must be a string'),
         body('address').optional().isString().withMessage('Address must be a string'),
         body('phone_no').optional().isString().withMessage('Phone number must be a string'),
         body('birth_date').optional().isISO8601().toDate().withMessage('Birth date must be a valid date'),
+        body('state').optional().isString().withMessage('State must be a string'),
+        body('country').optional().isString().withMessage('Country must be a string'),
+        body('enrolled_courses').not().isEmpty().withMessage('Course type is required'),
     ],
     async (req, res, next) => {
         try {
@@ -60,7 +67,7 @@ router.put('/:id',
             const updateStudent = await Student.findByIdAndUpdate(
                 req.params.id,
                 req.body,
-                { new: true, validationResult: true });
+                 { new: true, validationResult: true });
             if(!updateStudent){
                 res.status(400).json({msg:"the student not found"})
             }
@@ -84,7 +91,7 @@ router.patch('/:id',
         if(password){
             return res.status(400).json({msg:"Password cannot be updated using this route"})
         }
-        const hashPassword = await bcrypt.hash(password,10);
+        const hashPassword = await hashpassword(password);
         const updateStudent = await Student.findByIdAndUpdate(
             req.params.id,
             {password: hashPassword},

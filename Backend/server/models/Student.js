@@ -13,14 +13,6 @@ const StudentSchema = new mongoose.Schema({
         maxlength: [50, 'First name cannot exceed 50 characters'],
         match: [nameRegex, 'First name contains invalid characters']
     },
-    Lname: {
-        type: String,
-        trim: true,
-        required: [true, 'Last name is required'],
-        minlength: [2, 'Last name must be at least 2 characters'],
-        maxlength: [50, 'Last name cannot exceed 50 characters'],
-        match: [nameRegex, 'Last name contains invalid characters']
-    },
     email: {
         type: String,
         unique: true,
@@ -63,8 +55,12 @@ const StudentSchema = new mongoose.Schema({
         }
     },
     enrolled_courses: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Subject' }],
-        default: []
+        type: String,
+        enum: {
+            values: ['science', 'Commercial', 'Humanity'],
+            message: 'Course type must be one of: science, Commercial, or Humanity'
+        },
+        required: [true, 'Course type is required'],
     },
     state: {
         type: String,

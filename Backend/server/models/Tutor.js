@@ -10,18 +10,11 @@ const TutorSchema = new mongoose.Schema({
         type: String,
         required: [true, 'First name is required'],
         minlength: [2, 'First name must be at least 2 characters'],
-        maxlength: [50, 'First name cannot exceed 50 characters'],
+        maxlength: [80, 'First name cannot exceed 50 characters'],
         trim: true,
         match: [nameRegex , 'First name can contain only letters, spaces, apostrophes and hyphens']
     },
-    Lname: {
-        type: String,
-        required: [true, 'Last name is required'],
-        minlength: [2, 'Last name must be at least 2 characters'],
-        maxlength: [50, 'Last name cannot exceed 50 characters'],
-        trim: true,
-        match: [nameRegex , 'Last name can contain only letters, spaces, apostrophes and hyphens']
-    },
+
     email: {
         type: String,
         required: [true, 'Please provide an email'],

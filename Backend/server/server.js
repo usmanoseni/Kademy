@@ -3,6 +3,7 @@ const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 const path = require('path');
 const cors = require('cors');
+const session = require('express-session');
 
 //load env variables
 dotenv.config();
@@ -13,6 +14,13 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false,
+    cookie: { secure: false, maxAge: 60000 *60*60*24 } // 24 hour
+}));
 
 //Root route
 app.get('/', (req, res) => {
