@@ -71,7 +71,16 @@ const StudentSchema = new mongoose.Schema({
         type: String,
         trim: true,
         default: null
+    },
+    resetOtp: {
+        type: String,
+        default: null
+    },
+    otpExpired: {
+        type: Date,
+        default: null
     }
+
 
 }, { timestamps: true });
 

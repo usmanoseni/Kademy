@@ -2,7 +2,7 @@ const express = require('express');
 const Student = require('../models/Student')
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const hashpassword = require('../utlis/hashPassword');
+const hashpassword = require('../middleware/utlis/hashPassword');
 
 
 // get all students by id

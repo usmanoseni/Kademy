@@ -21,19 +21,27 @@ Kademy/
 │   ├── server/
 │   │   ├── server.js (main Express app entry point)
 │   │   ├── config/
-│   │   │   └── db.js (MongoDB connection)
+│   │   │   └── db.js (MongoDB connection configuration)
+│   │   ├── middleware/
+│   │   │   └── utlis/
+│   │   │       └── hashPassword.js (bcrypt password hashing utilities)
 │   │   ├── models/
-│   │   │   ├── Tutor.js (tutor profile schema with validation)
-│   │   │   ├── Student.js (student profile schema with validation)
-│   │   │   ├── Subject.js (subject schema with validation)
-│   │   │   ├── Qualification.js (qualifications with validation)
-│   │   │   ├── Content.js
-│   │   │   └── Post.js
+│   │   │   ├── Student.js (student profile schema)
+│   │   │   ├── Tutor.js (tutor profile schema)
+│   │   │   ├── Subject.js (subject schema)
+│   │   │   ├── Qualification.js (tutor qualifications schema)
+│   │   │   ├── Content.js (learning content schema)
+│   │   │   ├── contentHistory.js (content modification history)
+│   │   │   └── comment.js (comments schema)
 │   │   └── router/
-│   │       ├── authRouter.js
-│   │       ├── tutorRouter.js
-│   │       ├── studentsRouter.js
-│   │       └── contentRouter.js
+│   │       ├── authRouter.js (authentication endpoints)
+│   │       ├── studentsRouther.js (student management endpoints)
+│   │       ├── tutorRouter.js (tutor management endpoints)
+│   │       ├── subjectRouter.js (subject management endpoints)
+│   │       ├── contentRouter.js (content management endpoints)
+│   │       ├── commentRouter.js (comments endpoints)
+│   │       ├── qualificationRouter.js (qualification endpoints)
+│   │       └── historyRouter.js (content history endpoints)
 │   ├── .env (environment variables)
 │   ├── package.json
 │   └── node_modules/
@@ -72,14 +80,23 @@ Kademy/
 
    ```
    PORT=5000
-   DB_URI=<your-database-uri>
+   DB_URI=<your-mongodb-uri>
    NODE_ENV=development
+   SESSION_SECRET=<your-session-secret>
    ```
 
 4. **Start the server:**
 
+   For development (with nodemon auto-reload):
+
    ```bash
    npm run dev
+   ```
+
+   For production:
+
+   ```bash
+   npm start
    ```
 
    The server should now be running on `http://localhost:5000`
@@ -110,10 +127,70 @@ Kademy/
 
 ## Key Features
 
-- Simple and intuitive user interface
-- Focused on local curricula (WAEC, NECO, JAMB)
-- Affordable subscription plans
-- Offline access support for low-connectivity areas
+- **Secure Authentication:** User registration and login with bcrypt password hashing
+- **User Management:** Separate profiles for students and tutors
+- **Content Management:** Structured learning materials with version history tracking
+- **Interactive Comments:** Discussion system on content materials
+- **Qualifications Tracking:** Tutor qualification verification
+- **Subject Organization:** Organized by academic subjects and syllabi
+- **CORS Enabled:** Secure cross-origin requests
+- **Session Management:** Express session configuration for user sessions
+- **Performance Analytics:** Track student progress with content history
+- **Simple and intuitive user interface**
+- **Focused on local curricula (WAEC, NECO, JAMB)**
+- **Affordable subscription plans**
+- **Offline access support for low-connectivity areas**
+
+---
+
+## API Endpoints Overview
+
+### Authentication
+
+- `POST /auth/register` - Register new user
+- `POST /auth/login` - User login
+- `POST /auth/logout` - User logout
+
+### Students
+
+- `GET /students` - Get all students
+- `GET /students/:id` - Get student profile
+- `PUT /students/:id` - Update student profile
+
+### Tutors
+
+- `GET /tutors` - Get all tutors
+- `GET /tutors/:id` - Get tutor profile
+- `PUT /tutors/:id` - Update tutor profile
+
+### Content
+
+- `GET /content` - Get all content
+- `POST /content` - Create new content
+- `PUT /content/:id` - Update content
+- `DELETE /content/:id` - Delete content
+
+### Subjects
+
+- `GET /subjects` - Get all subjects
+- `POST /subjects` - Create subject
+
+### Comments
+
+- `POST /comments` - Add comment
+- `GET /comments/:contentId` - Get comments for content
+
+---
+
+## Technologies Used
+
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB with Mongoose
+- **Authentication:** bcrypt for password hashing
+- **Session Management:** express-session
+- **Validation:** express-validator
+- **Development:** nodemon for auto-reload
+- **CORS:** Enabled for cross-origin requests
 
 ---
 

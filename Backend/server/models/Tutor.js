@@ -87,6 +87,14 @@ const TutorSchema = new mongoose.Schema({
             match: [urlRegex, 'Please provide a valid URL for linkedin'],
             default: null
         }
+    },
+    resetOtp: {
+        type: String,
+        default: null
+    },
+    otpExpired: {
+        type: Date,
+        default: null
     }
 
 }, { timestamps: true });
