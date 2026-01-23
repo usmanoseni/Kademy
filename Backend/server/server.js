@@ -5,6 +5,16 @@ const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
 
+//import routers
+const authRouter = require('./router/authRouters'); 
+const subjectRouter = require('./router/subjectRouter');
+const historyRouter = require('./router/historyRouter');
+const tutorRouter = require('./router/tutorRouter');
+const studentRouter = require('./router/studentsRouther');
+const contentRouter = require('./router/contentRouter');
+const commentRouter = require('./router/commentRouter');
+const QualificationRouter = require('./router/qualificationRouter');    
+
 //load env variables
 dotenv.config();
 
@@ -13,14 +23,26 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || 'your-secret-key',
     saveUninitialized: false,
     resave: false,
-    cookie: { secure: false, maxAge: 60000 *60*60*24 } // 24 hour
+    cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 } // 24 hours
 }));
+
+//use routers
+app.use('/api/subjects', subjectRouter);
+app.use('/api/history', historyRouter);
+app.use('/api', authRouter);
+app.use('/api/tutors', tutorRouter);
+app.use('/api/students', studentRouter);
+app.use('/api/contents', contentRouter);
+app.use('/api/comments', commentRouter);
+app.use('/api/qualifications', QualificationRouter);
+
 
 //Root route
 app.get('/', (req, res) => {

@@ -21,9 +21,9 @@ const ContentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tutor',
     },
-    subject_id: {
-        type: mongoose.Types.ObjectId,
-        ref: 'Subject',
+    subject_name: {
+        type: String,
+        trim: true,
     },
     content_url: {
         type: String,

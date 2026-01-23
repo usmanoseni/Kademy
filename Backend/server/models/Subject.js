@@ -12,8 +12,8 @@ const SubjectSchema = new mongoose.Schema({
     course_type: {
         type: String,
         enum: {
-            values: ['science', 'Commercial', 'Humanity'],
-            message: 'Course type must be one of: science, Commercial, or Humanity'
+            values: ['Science', 'Commercial',  'Arts', 'General'],
+            message: 'Course type must be one of: science, Commercial, Humanity, Arts, or General'
         },
         required: [true, 'Course type is required'],
         trim: true

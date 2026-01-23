@@ -34,7 +34,6 @@ const TutorSchema = new mongoose.Schema({
     },
     phone1_no: {
         type: String,
-        required: [true, 'Primary phone number is required'],
         unique: true,
         trim: true,
         match: [phoneRegex, 'Phone number must contain only digits and may start with +, length 7-15']
@@ -68,7 +67,7 @@ const TutorSchema = new mongoose.Schema({
         maxlength: [1000, 'Description cannot exceed 1000 characters'],
         default: null
     },
-    Social_links: {
+    social_links: {
         facebook: {
             type: String,
             trim: true,
@@ -98,10 +97,5 @@ const TutorSchema = new mongoose.Schema({
     }
 
 }, { timestamps: true });
-
-// Indexes: ensure uniqueness where appropriate
-TutorSchema.index({ email: 1 }, { unique: true, sparse: false });
-TutorSchema.index({ phone1_no: 1 }, { unique: true, sparse: false });
-TutorSchema.index({ phone2_no: 1 }, { unique: true, sparse: true });
 
 module.exports = mongoose.model('Tutor', TutorSchema);

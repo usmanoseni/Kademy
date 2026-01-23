@@ -7,7 +7,9 @@ const router = express.Router();
 router.get('/:course_type', async (req, res, next) => {
     try {
         const course_type = req.params.course_type;
-        const findSubjects = await Subject.find({ course_type: course_type })
+        const findSubjects = await Subject.find({
+                course_type: { $in: [course_type, 'General'] }
+         })
         res.status(200).json(findSubjects)
     } catch (err) {
         next(err)
@@ -24,7 +26,8 @@ router.post('/',
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return res.status(400).json({ errors: errors.array() });
+              
+                return res.status(400).json();
             }
             const newSubject = new Subject(req.body);
             const savedSubject = await newSubject.save();

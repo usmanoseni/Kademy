@@ -156,6 +156,50 @@ router.post('/auth/tutor/reset-password', async (req, res, next) => {
     }
 })
 
+// Logout route for students
+router.post('/auth/student/logout', (req, res, next) => {
+    try {
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).json({ msg: "Error logging out" });
+            }
+            res.clearCookie('connect.sid');
+            res.status(200).json({ msg: "Logged out successfully" });
+        });
+    } catch (err) {
+        next(err);
+    }
+});
 
+// Logout route for tutors
+router.post('/auth/tutor/logout', (req, res, next) => {
+    try {
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).json({ msg: "Error logging out" });
+            }
+            res.clearCookie('connect.sid');
+            res.status(200).json({ msg: "Logged out successfully" });
+        });
+    } catch (err) {
+        next(err);
+    }
+});
+
+// Verify session route
+router.get('/auth/verify', (req, res, next) => {
+    try {
+        if (req.session.userId) {
+            res.status(200).json({ 
+                msg: "User is authenticated",
+                userId: req.session.userId 
+            });
+        } else {
+            res.status(401).json({ msg: "User is not authenticated" });
+        }
+    } catch (err) {
+        next(err);
+    }
+});
 
 module.exports = router;

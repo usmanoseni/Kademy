@@ -57,10 +57,14 @@ const StudentSchema = new mongoose.Schema({
     enrolled_courses: {
         type: String,
         enum: {
-            values: ['science', 'Commercial', 'Humanity'],
+            values: ['Science', 'Commercial', 'Arts'],
             message: 'Course type must be one of: science, Commercial, or Humanity'
         },
-        required: [true, 'Course type is required'],
+        default: null
+    },
+    completeRegistration: {
+        type: Boolean,
+        default: false
     },
     state: {
         type: String,
@@ -83,9 +87,5 @@ const StudentSchema = new mongoose.Schema({
 
 
 }, { timestamps: true });
-
-// Indexes
-StudentSchema.index({ email: 1 }, { unique: true });
-StudentSchema.index({ phone_no: 1 }, { unique: true, sparse: true });
 
 module.exports = mongoose.model('Student', StudentSchema);

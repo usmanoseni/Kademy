@@ -1,10 +1,11 @@
 const express = require('express');
-const qualification = require('../models/Qualification');
-const { body } = require('express-validator');
+const qualifications = require('../models/Qualification');
+const { body, validationResult } = require('express-validator');
 const router = express.Router();
+const { requireAuth } = require('../middleware/authMiddleware');
 
 //post qualification 
-router.post('/:id', [
+router.post('/:id', requireAuth, [
     body('institution').not().isEmpty().withMessage('Institution name is required'),
     body('other').optional().isString().withMessage('Other details must be a string'),
     body('certificate1_img').not().isEmpty().withMessage('Certificate image is required'),
@@ -20,7 +21,7 @@ router.post('/:id', [
             ...req.body,
             tutor_id: userId
         }
-        const qualification = new qualification(newQualification);
+        const qualification = new qualifications(newQualification);
         const savedQualification = await qualification.save();
         res.status(201).json(savedQualification);
     } catch (err) {
@@ -29,10 +30,10 @@ router.post('/:id', [
 });
 
 //delete qualification by id
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', requireAuth, async (req, res, next) => {
     try {
         const userId = req.params.id;
-        const deletedQualification = await Subject.findByIdAndDelete(userId);
+        const deletedQualification = await qualifications.findByIdAndDelete(userId);
         if (!deletedQualification) {
             return res.status(404).json({ message: 'Qualification not found' });
         }

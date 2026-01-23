@@ -13,10 +13,9 @@ const CommentSchema = new mongoose.Schema({
                 required: true,
                 refPath: 'comments.userModel' // dynamic reference to the sibling field
             },
-            userModel: { // specifies which collection the user_id refers to
-                type: String,
+            comment_id: {
+                type: Number,
                 required: true,
-                enum: ['Student', 'Tutor']
             },
             comment_context: {
                 type: String,
