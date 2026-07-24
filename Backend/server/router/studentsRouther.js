@@ -39,6 +39,7 @@ router.patch('/:id', requireAuth,
         body('state').optional().isString().withMessage('State must be a string'),
         body('country').optional().isString().withMessage('Country must be a string'),
         body('enrolled_courses').optional().isString().withMessage('Course type must be a string'),
+        body('school_name').optional().isString().withMessage('School name must be a string')
     ], 
     async (req, res, next) => {
         try {
@@ -73,6 +74,7 @@ router.put('/:id', requireAuth,
         body('state').optional().isString().withMessage('State must be a string'),
         body('country').optional().isString().withMessage('Country must be a string'),
         body('enrolled_courses').not().isEmpty().withMessage('Course type is required'),
+        body('school_name').optional().isString().withMessage('School name must be a string')
     ],
     async (req, res, next) => {
         try {

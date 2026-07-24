@@ -1,6 +1,5 @@
 import weac from './weac.png';
 import male_1 from './male1.jpg'; 
-import male_2 from './male2.jpg';
 import female_1 from './female1.jpg';
 import jamb from './jamb.jpg';
 import logo from './logo.png';
@@ -19,9 +18,9 @@ import female3 from './female3.jpg'
 import female4 from './female4.jpg'
 import stud1 from './stud1.jpg'
 import stud2 from './stud2.jpg'
-import stud3 from './stud3.jpg'
-import stud4 from './stud4.jpg'
-import stud5 from './stud5.jpg'
+import stud3 from './stud_3.jpg'
+import stud4 from './stud_4.jpg'
+import stud5 from './stud_5.jpg'
 
  const assets = {
   weac,

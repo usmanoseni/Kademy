@@ -1,11 +1,12 @@
 import React from "react";
 import { assets as assert } from '../asserts/assert';
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"; 
+import {Link, useLocation } from 'react-router-dom';
 
 const listItem1 = [
-  { name: "Home", href: "#home" },
-  { name: "Student", href: "#student" },
-  { name: "Tutor", href: "#tutor" } 
+  { name: "Home", to: "/" },
+  { name: "Student", to: "/student" },
+  { name: "Tutor", to: "/tutor" }
 ];
 
 const listItem2 = [
@@ -21,6 +22,13 @@ const Footer: React.FC = () => {
         window.addEventListener('hashchange', onHash);
         return () => window.removeEventListener('hashchange', onHash);
       }, []);
+  
+     const location = useLocation();
+
+      const quickLinkClass = (path: string) =>
+        location.pathname === path
+          ? 'text-white font-semibold'
+          : 'hover:text-orange-400 transition-colors';
     
     return (
          <footer className='w-full h-full flex-col  items-center justify-center'>
@@ -56,15 +64,15 @@ const Footer: React.FC = () => {
                         <div className='flex flex-col gap-1.5 justify-items-start '>
                           <div className=' font-google-sans-flex text-lg font-semibold text-white  '>Quick Links</div>
                           <ul className='flex flex-col gap-2 mt-2 text-sm '>
-                            {listItem1.map(({name, href}) => (
+                            {listItem1.map(({name, to}) => (
                               <li key={name}>
-                                <a
-                                  href={href}
-                                  onClick={(e) => { e.preventDefault(); window.location.hash = href; }}
-                                  className={currentHash === href ? 'text-white' : 'hover:text-orange-400 '}
+                                <Link
+                                  to={to}
+                                aria-current={location.pathname === to ? 'page' : undefined}
+                                  className={quickLinkClass(to)}
                                 >
                                   {name}
-                                </a>
+                                </Link>
                               </li>
                             ))}
                           </ul>

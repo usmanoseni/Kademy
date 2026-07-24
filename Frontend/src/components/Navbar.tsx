@@ -1,7 +1,7 @@
 import React from "react";
+import { Link, useLocation } from 'react-router-dom';
 import { assets as assert } from '../asserts/assert';
 import { Moon, Sun } from "lucide-react";
-// track url hash directly so Navbar works without react-router wrapper
 
 
 type NavbarProps = {
@@ -14,17 +14,11 @@ type NavbarProps = {
 const Navbar: React.FC<NavbarProps> = ({ theme, setTheme, hideOnFooter = false }) => { 
     type isMenuOpen = boolean;
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const [currentHash, setCurrentHash] = React.useState<string>(window.location.hash || '#home');
+    const location = useLocation();
 
-    React.useEffect(() => {
-        const onHash = () => setCurrentHash(window.location.hash || '#home');
-        window.addEventListener('hashchange', onHash);
-        return () => window.removeEventListener('hashchange', onHash);
-    }, []);
-
-    const navClass = (anchor: string) => {
+    const navClass = (path: string) => {
         const base = 'text-gray-900 max-sm:font-medium  dark:text-neutral-300 dark:hover:text-white hover:text-indigo-700 transition-colors duration-300 max-sm:text-neutral-200  max-sm:hover:text-neutral-50';
-        return `${base} ${currentHash === anchor ? 'text-indigo-600 font-semibold' : ''}`;
+        return `${base} ${location.pathname === path ? 'text-indigo-600 font-semibold' : ''}`;
     }
 
     return ( 
@@ -49,15 +43,15 @@ const Navbar: React.FC<NavbarProps> = ({ theme, setTheme, hideOnFooter = false }
                         </svg>
                     </div>
                     <ul className="flex justify-center items-center gap-5.5 text-sm max-sm:flex-col max-sm:justify-start max-sm:items-start max-sm:pt-20 max-sm:pl-8  ">
-                        <a className={navClass('#home')} href="#home" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); window.location.hash = '#home'; }}>
+                        <Link className={navClass('/')} to="/" onClick={() => setIsMenuOpen(false)}>
                             <li>Home</li>
-                        </a>
-                        <a className={navClass('#student')} href="#student" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); window.location.hash = '#student'; }}>
+                        </Link>
+                        <Link className={navClass('/student')} to="/student" onClick={() => setIsMenuOpen(false)}>
                             <li>Student</li>
-                        </a>
-                        <a className={navClass('#tutor')} href="#tutor" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); window.location.hash = '#tutor'; }}>
+                        </Link>
+                        <Link className={navClass('/tutor')} to="/tutor" onClick={() => setIsMenuOpen(false)}>
                             <li>Tutor</li>
-                        </a>
+                        </Link>
                     </ul>
                 </div>
                 <div className="flex justify-center items-center sm:gap-1.5 md:gap-4">
@@ -72,15 +66,15 @@ const Navbar: React.FC<NavbarProps> = ({ theme, setTheme, hideOnFooter = false }
                         </div>
                     </div>
                     <div className="hidden  sm:flex justify-center items-center gap-1.5 ">
-                       <a href="#"> <button className="flex justify-center items-center py-1.5 px-3.5 text-sm cursor-pointer  hover:bg-neutral-100  dark:hover:bg-gray-800 rounded-sm transition-colors duration-200">Sign in</button></a>
-                        <a href="#">
+                       <Link to="/auth/student/register"> <button className="flex justify-center items-center py-1.5 px-3.5 text-sm cursor-pointer  hover:bg-neutral-100  dark:hover:bg-gray-800 rounded-sm transition-colors duration-200">Sign in</button></Link>
+                        <Link to="/auth/student/login">
                             <button className="flex justify-center items-center py-1.5 px-5 rounded-sm text-sm cursor-pointer bg-gradient-to-br from-blue-600 to-violet-600 text-white hover:from-blue-700 transition-colors duration-200 hover:to-violet-700">
                                 <span className="flex justify-center  items-center text-white " >Start learning</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-3 flex justify-center items-center ml-1.5">
                                 <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd" />
                                 </svg>
                             </button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

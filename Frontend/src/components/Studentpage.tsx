@@ -1,16 +1,18 @@
 import Navbar from './Navbar'
 import Footer from './Footer'
-import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
+import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import '../index.css';
 import satudentvid from '../videos/Student.mp4'
-import { assets } from '../asserts/assert';
+import { assets,} from '../asserts/assert';
 
 const listimg = [
-    assets.stud1,
-    assets.stud2,
-    assets.stud3,
-    assets.stud4,
-    assets.stud5
+  assets.stud1,
+  assets.stud2,
+  assets.stud3,
+  assets.stud4,
+  assets.stud5
 ];
 
 const benefits = [
@@ -170,8 +172,6 @@ const Studentpage: React.FC<StudentpageProps> = ({ theme, setTheme }) => {
       <div className={`flex-col justify-center items-center w-full  h-full ${theme === 'dark' ? 'bg-slate-900' : 'bg-radial-[at_ 25%_50%_75%] from-white via-blue-100/10 to-indigo-300/20 to-90%'}`}>
         <div className={`${theme === 'dark' ? 'pattern' : 'pattern'}  w-full h-full lg:h-[100vh]  flex-col justify-center items-center gap-10 flex relative`}>
             <Navbar theme={theme} setTheme={setTheme} hideOnFooter={isFooterVisible} />
-            <div className={` bg-fuchsia-400/10 dark:bg-fuchsia-400/30 w-1/6 blur-3xl top-16  h-[60vh] overflow-hidden opacity-65 brightness-50 rounded-3xl inset-x-0 mx-auto  absolute  z-0 rotate-45`}></div>
-            <div className={` max-sm:hidden dark:bg-blue-400/30 bg-indigo-500/10  blur-3xl   w-1/6 top-16  h-[80vh] overflow-hidden opacity-65 brightness-50 rounded-3xl inset-x-0 mx-auto left-1/4 lg:left-2/4  absolute  z-0 rotate-45`}></div>
             <div className='grid pb-24 md:pb-16 lg:pb-0 grid-cols-1 md:grid-cols-2 w-5/6 h-full items-center gap-6 relative z-10 top-14 lg:top-6 '>
                 <div className='py-6 md:ml-2 '  >
                     <div className='flex items-center gap-2 mb-5'   >
@@ -187,15 +187,15 @@ const Studentpage: React.FC<StudentpageProps> = ({ theme, setTheme }) => {
                         <p className='text-gray-700 dark:text-gray-300 max-sm:text-sm ml-4 max-sm:w-full w-full  text-base font-noto-sans-display md:text-base lg:text-lg mb-8'>A simple and personalized learning space designed to help you study faster and better thoughout their academic journey in secondary schools.</p>
                     </div>
                     <div className='flex justify-start ml-2 md:ml-4 items-center gap-4 '>
-                        <a href="#"><button className='border border-gray-900 px-6 max-sm:text-sm  py-1.5 md:py-2 rounded-md cursor-pointer font-medium hover:bg-gradient-to-br hover:from-blue-500 hover:to-indigo-700 hover:text-white relative z-20 dark:border-white hover:border-indigo-600 '>
+                        <Link to="/Auth/Student/Register"><button className='border border-gray-900 px-6 max-sm:text-sm  py-1.5 md:py-2 rounded-md cursor-pointer font-medium hover:bg-gradient-to-br hover:from-blue-500 hover:to-indigo-700 hover:text-white relative z-20 dark:border-white hover:border-indigo-600 '>
                         Register
-                        </button></a> 
-                        <a href="#"><button className="flex max-sm:text-sm bg-gradient-to-br from-blue-500 to-indigo-700 cursor-pointer transition-all duration-200 text-white py-2 px-2 md:py-2 md:px-3  justify-center items-center relative z-20 gap-2.5 rounded-lg hover:from-blue-600 hover:to-indigo-700">
+                        </button></Link> 
+                        <Link to="/Auth/Student/login"><button className="flex max-sm:text-sm bg-gradient-to-br from-blue-500 to-indigo-700 cursor-pointer transition-all duration-200 text-white py-2 px-2 md:py-2 md:px-3  justify-center items-center relative z-20 gap-2.5 rounded-lg hover:from-blue-600 hover:to-indigo-700">
                         Start Learning
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className=" text-white max-sm:size-5 size-7 rotate-90 ">
                             <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
                         </svg>
-                        </button></a>
+                        </button></Link>
                     </div> 
                 </div>  
                 <div className='relative w-full overflow-hidden bg-slate-200 rounded-2xl h-[15rem]  md:h-[20rem] shadow-2xl shadow-slate-500/20 dark:shadow-slate-400/20  '>
@@ -216,6 +216,8 @@ const Studentpage: React.FC<StudentpageProps> = ({ theme, setTheme }) => {
                 </div> 
           </div>
         </div>
+          <div className={`${theme === 'dark' ? '' : 'hidden'}    bg-blue-600 opacity-40 brightness-70 blur-3xl absolute top-20 right-2/6 md:right-5/6 rounded-3xl z-0 w-30 h-[80vh] rotate-160 md:rotate-150 lg:rotate-135`}></div>
+          <div className={`${theme === 'dark' ? '' : 'hidden'}  max-sm:hidden bg-fuchsia-600 opacity-40 blur-3xl brightness-70 absolute top-14 right-2/6 rounded-3xl z-0 w-30 h-[80vh] rotate-160 md:rotate-150 lg:rotate-135 `}></div>
       
         <div className='py-12 mx-auto w-full bg-slate-50 dark:bg-slate-800/40 '>
           <h2 className='text-2xl/8 md:text-3xl/10 text-center lg:text-4xl/12 font-semibold text-blue-950 mb-2 dark:text-white font-google-sans-flex'>Benefit of Our platform to the student.</h2>
@@ -294,7 +296,7 @@ const Studentpage: React.FC<StudentpageProps> = ({ theme, setTheme }) => {
                       <span className='text-slate-500 dark:text-slate-400 text-xs'> - Student </span>
                     </div>
                   </div>
-                  <img src={assets.man1} className='size-12 max-sm:size-16 ring-2 ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
+                  <img src={assets.man1} className='size-12 object-cover bg-top ring-2  ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
                </div>
                 <div className='text-gray-700 mt-4 w-full h-full line-clamp-10 leading-6 font-noto-sans-display dark:text-slate-300 text-sm '>
                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores maxime vitae, amet reprehenderit quidem et minus magni aliquam obcaecati modi fugiat saepe quis ipsam ex, incidunt dignissimos soluta consequuntur! Sint quae maiores unde quibusdam ut voluptatibus sed nulla provident numquam est, libero dolorem, ab nostrum ipsam optio culpa repellat voluptate illum commodi dignissimos maxime at modi. Quod ab eum quas?
@@ -304,7 +306,7 @@ const Studentpage: React.FC<StudentpageProps> = ({ theme, setTheme }) => {
                   <div className='text-slate-500 dark:text-slate-400 text-xs mt-0.5'>Nigeria <span className='font-extrabold text-green-600'>__</span></div>
                 </div>
               </div>
-              <div className='bg-white  min-w-[18rem] h-full  p-3.5  rounded-2xl shadow-lg dark:bg-slate-800 '>
+              <div className='bg-white min-w-[18rem] h-full  p-3.5  rounded-2xl shadow-lg dark:bg-slate-800 '>
                 <div className='flex justify-between items-center gap-2.5'>
                   <div className='flex-col justify-end items-end'>
                     <div className='text-sm font-medium text-slate-800 dark:text-slate-100 text-end mb-1'>Iganmode Grammar school Ota</div>
@@ -313,17 +315,17 @@ const Studentpage: React.FC<StudentpageProps> = ({ theme, setTheme }) => {
                       <span className='text-slate-500 dark:text-slate-400 text-xs'> - Student </span>
                     </div>
                   </div>
-                  <img src={assets.man1} className='size-12 max-sm:size-16 ring-2 ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
+                  <img src={assets.man1} className='size-12 object-cover bg-top ring-2  ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
                </div>
                 <div className='text-gray-700 mt-4 w-full h-full line-clamp-10 leading-6 font-noto-sans-display dark:text-slate-300 text-sm '>
-                 WAEC is a regional examination body established in 1952 to conduct standardized exams across Anglophone West African countries, including Nigeria, Ghana, Sierra Leone, The Gambia, and Liberia. In Nigeria, WAEC conducts the Senior Secondary School Certificate Examination (SSCE), which is the main qualification for students completing secondary school.
+                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores maxime vitae, amet reprehenderit quidem et minus magni aliquam obcaecati modi fugiat saepe quis ipsam ex, incidunt dignissimos soluta consequuntur! Sint quae maiores unde quibusdam ut voluptatibus sed nulla provident numquam est, libero dolorem, ab nostrum ipsam optio culpa repellat voluptate illum commodi dignissimos maxime at modi. Quod ab eum quas?
                 </div>
                 <div className='mt-3 text-sm flex-col gap-1'>
                   <div className='font-medium text-slate-800 dark:text-slate-200 tracking-wide '>Oseni Usman</div>
                   <div className='text-slate-500 dark:text-slate-400 text-xs mt-0.5'>Nigeria <span className='font-extrabold text-green-600'>__</span></div>
                 </div>
               </div>
-             <div className='bg-white  min-w-[18rem] h-full  p-3.5  rounded-2xl shadow-lg dark:bg-slate-800 '>
+             <div className='bg-white min-w-[18rem] h-full  p-3.5  rounded-2xl shadow-lg dark:bg-slate-800 '>
                 <div className='flex justify-between items-center gap-2.5'>
                   <div className='flex-col justify-end items-end'>
                     <div className='text-sm font-medium text-slate-800 dark:text-slate-100 text-end mb-1'>Iganmode Grammar school Ota</div>
@@ -332,29 +334,10 @@ const Studentpage: React.FC<StudentpageProps> = ({ theme, setTheme }) => {
                       <span className='text-slate-500 dark:text-slate-400 text-xs'> - Student </span>
                     </div>
                   </div>
-                  <img src={assets.man1} className='size-12 max-sm:size-16 ring-2 ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
+                  <img src={assets.man1} className='size-12 object-cover bg-top ring-2  ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
                </div>
                 <div className='text-gray-700 mt-4 w-full h-full line-clamp-10 leading-6 font-noto-sans-display dark:text-slate-300 text-sm '>
-                 WAEC is a regional examination body established in 1952 to conduct standardized exams across Anglophone West African countries, including Nigeria, Ghana, Sierra Leone, The Gambia, and Liberia. In Nigeria, WAEC conducts the Senior Secondary School Certificate Examination (SSCE), which is the main qualification for students completing secondary school.
-                </div>
-                <div className='mt-3 text-sm flex-col gap-1'>
-                  <div className='font-medium text-slate-800 dark:text-slate-200 tracking-wide '>Oseni Usman</div>
-                  <div className='text-slate-500 dark:text-slate-400 text-xs mt-0.5'>Nigeria <span className='font-extrabold text-green-600'>__</span></div>
-                </div>
-              </div>
-              <div className='bg-white  min-w-[18rem] h-full  p-3.5  rounded-2xl shadow-lg dark:bg-slate-800 '>
-                <div className='flex justify-between items-center gap-2.5'>
-                  <div className='flex-col justify-end items-end'>
-                    <div className='text-sm font-medium text-slate-800 dark:text-slate-100 text-end mb-1'>Iganmode Grammar school Ota</div>
-                    <div className='flex gap-1 items-center justify-end'>
-                      <span className='text-xs font-medium text-violet-700 dark:text-violet-300  '>Ogun state</span>
-                      <span className='text-slate-500 dark:text-slate-400 text-xs'> - Student </span>
-                    </div>
-                  </div>
-                  <img src={assets.man1} className='size-12 max-sm:size-16 ring-2 ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
-               </div>
-                <div className='text-gray-700 mt-4 w-full h-full line-clamp-10 leading-6 font-noto-sans-display dark:text-slate-300 text-sm '>
-                 WAEC is a regional examination body established in 1952 to conduct standardized exams across Anglophone West African countries, including Nigeria, Ghana, Sierra Leone, The Gambia, and Liberia. In Nigeria, WAEC conducts the Senior Secondary School Certificate Examination (SSCE), which is the main qualification for students completing secondary school.
+                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores maxime vitae, amet reprehenderit quidem et minus magni aliquam obcaecati modi fugiat saepe quis ipsam ex, incidunt dignissimos soluta consequuntur! Sint quae maiores unde quibusdam ut voluptatibus sed nulla provident numquam est, libero dolorem, ab nostrum ipsam optio culpa repellat voluptate illum commodi dignissimos maxime at modi. Quod ab eum quas?
                 </div>
                 <div className='mt-3 text-sm flex-col gap-1'>
                   <div className='font-medium text-slate-800 dark:text-slate-200 tracking-wide '>Oseni Usman</div>
@@ -370,10 +353,10 @@ const Studentpage: React.FC<StudentpageProps> = ({ theme, setTheme }) => {
                       <span className='text-slate-500 dark:text-slate-400 text-xs'> - Student </span>
                     </div>
                   </div>
-                  <img src={assets.man1} className='size-12 max-sm:size-16 ring-2 ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
+                  <img src={assets.man1} className='size-12 object-cover bg-top ring-2  ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
                </div>
                 <div className='text-gray-700 mt-4 w-full h-full line-clamp-10 leading-6 font-noto-sans-display dark:text-slate-300 text-sm '>
-                 WAEC is a regional examination body established in 1952 to conduct standardized exams across Anglophone West African countries, including Nigeria, Ghana, Sierra Leone, The Gambia, and Liberia. In Nigeria, WAEC conducts the Senior Secondary School Certificate Examination (SSCE), which is the main qualification for students completing secondary school.
+                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores maxime vitae, amet reprehenderit quidem et minus magni aliquam obcaecati modi fugiat saepe quis ipsam ex, incidunt dignissimos soluta consequuntur! Sint quae maiores unde quibusdam ut voluptatibus sed nulla provident numquam est, libero dolorem, ab nostrum ipsam optio culpa repellat voluptate illum commodi dignissimos maxime at modi. Quod ab eum quas?
                 </div>
                 <div className='mt-3 text-sm flex-col gap-1'>
                   <div className='font-medium text-slate-800 dark:text-slate-200 tracking-wide '>Oseni Usman</div>
@@ -389,10 +372,29 @@ const Studentpage: React.FC<StudentpageProps> = ({ theme, setTheme }) => {
                       <span className='text-slate-500 dark:text-slate-400 text-xs'> - Student </span>
                     </div>
                   </div>
-                  <img src={assets.man1} className='size-12 max-sm:size-16 ring-2 ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
+                  <img src={assets.man1} className='size-12 object-cover bg-top ring-2  ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
                </div>
                 <div className='text-gray-700 mt-4 w-full h-full line-clamp-10 leading-6 font-noto-sans-display dark:text-slate-300 text-sm '>
-                 WAEC is a regional examination body established in 1952 to conduct standardized exams across Anglophone West African countries, including Nigeria, Ghana, Sierra Leone, The Gambia, and Liberia. In Nigeria, WAEC conducts the Senior Secondary School Certificate Examination (SSCE), which is the main qualification for students completing secondary school.
+                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores maxime vitae, amet reprehenderit quidem et minus magni aliquam obcaecati modi fugiat saepe quis ipsam ex, incidunt dignissimos soluta consequuntur! Sint quae maiores unde quibusdam ut voluptatibus sed nulla provident numquam est, libero dolorem, ab nostrum ipsam optio culpa repellat voluptate illum commodi dignissimos maxime at modi. Quod ab eum quas?
+                </div>
+                <div className='mt-3 text-sm flex-col gap-1'>
+                  <div className='font-medium text-slate-800 dark:text-slate-200 tracking-wide '>Oseni Usman</div>
+                  <div className='text-slate-500 dark:text-slate-400 text-xs mt-0.5'>Nigeria <span className='font-extrabold text-green-600'>__</span></div>
+                </div>
+              </div>
+              <div className='bg-white min-w-[18rem] h-full  p-3.5  rounded-2xl shadow-lg dark:bg-slate-800 '>
+                <div className='flex justify-between items-center gap-2.5'>
+                  <div className='flex-col justify-end items-end'>
+                    <div className='text-sm font-medium text-slate-800 dark:text-slate-100 text-end mb-1'>Iganmode Grammar school Ota</div>
+                    <div className='flex gap-1 items-center justify-end'>
+                      <span className='text-xs font-medium text-violet-700 dark:text-violet-300  '>Ogun state</span>
+                      <span className='text-slate-500 dark:text-slate-400 text-xs'> - Student </span>
+                    </div>
+                  </div>
+                  <img src={assets.man1} className='size-12 object-cover bg-top ring-2  ring-orange-400 ring-offset-2 dark:ring-offset-slate-800  dark:bg-slate-800 rounded-full ' alt="" />
+               </div>
+                <div className='text-gray-700 mt-4 w-full h-full line-clamp-10 leading-6 font-noto-sans-display dark:text-slate-300 text-sm '>
+                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores maxime vitae, amet reprehenderit quidem et minus magni aliquam obcaecati modi fugiat saepe quis ipsam ex, incidunt dignissimos soluta consequuntur! Sint quae maiores unde quibusdam ut voluptatibus sed nulla provident numquam est, libero dolorem, ab nostrum ipsam optio culpa repellat voluptate illum commodi dignissimos maxime at modi. Quod ab eum quas?
                 </div>
                 <div className='mt-3 text-sm flex-col gap-1'>
                   <div className='font-medium text-slate-800 dark:text-slate-200 tracking-wide '>Oseni Usman</div>
@@ -411,20 +413,20 @@ const Studentpage: React.FC<StudentpageProps> = ({ theme, setTheme }) => {
         <div className='bg-white dark:bg-transparent py-12'>
           <div className='flex justify-center items-center w-full h-full ' >
             <div className="relative w-5/6 rounded-xl overflow-hidden shadow-2xl shadow-slate-400 dark:shadow-slate-800">
-              <img src={assets.bg3} alt="" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/70 to-teal-400/70 h-full"></div>
+              <img src={assets.bg4} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/80 to-indigo-700 h-full"></div>
               <div className="relative z-10 px-7 grid grid-cols-1 md:grid-cols-2 gap-6 py-5">
                 <div className='relative flex-col gap-6 justify-center content-center w-full h-full '> 
                     <h2 className='max-sm:text-2xl/8  max-md:text-3xl text-4xl  font-bold text-blue-950 mb-2  font-google-sans-flex max-md:text-center'>Start learning at <br /> your pace now</h2>
                       <p className='text-white leading-5 text-base/7 max-sm:text-sm  max-md:text-center font-noto-sans-display mt-5 '>Take control of your learning journey with flexible lessons designed around your schedule</p>
                 </div>
                   <div className='flex justify-center md:justify-end items-center'>
-                    <a href="#"><button className="flex  max-sm:text-sm  bg-gradient-to-br md:mr-10  from-orange-400 to-rose-600 cursor-pointer transition-all duration-200 text-white py-2 px-3 justify-center items-center relative z-20 gap-2.5 rounded-lg hover:from-orange-600 hover:to-rose-700">
+                    <Link to="/Auth/Student/Register"><button className="flex  max-sm:text-sm  bg-gradient-to-br md:mr-10  from-orange-400 to-rose-600 cursor-pointer transition-all duration-200 text-white py-2 px-3 justify-center items-center relative z-20 gap-2.5 rounded-lg hover:from-orange-600 hover:to-rose-700">
                             Rigister with Us 
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className=" text-white max-sm:size-5.5 size-7 rotate-45 ">
-                              <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className=" text-white max-sm:size-5 size-7 rotate-45 ">
+                              <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.3 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
                             </svg>
-                        </button></a>
+                        </button></Link>
                   </div>
               </div>
             </div>

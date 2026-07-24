@@ -1,6 +1,7 @@
 import Navbar from './Navbar'
 import Footer from './Footer'
-import { useState, useEffect, useRef,Dispatch, SetStateAction } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 import '../index.css'
 import satudentvid from '../videos/movie.mp4'
 import { assets } from '../asserts/assert';
@@ -68,8 +69,6 @@ const Tutorpage: React.FC<TutorpageProps> = ({ theme, setTheme }) => {
     <div className={`flex-col justify-center items-center w-full  h-full ${theme === 'dark' ? 'bg-slate-900' : 'bg-radial-[at_ 25%_50%_75%] from-white via-blue-100/10 to-indigo-300/20 to-90%'}`}>
       <div className={`${theme === 'dark' ? 'pattern' : 'pattern'}  w-full h-full lg:h-screen  flex-col justify-center items-center gap-10 flex relative`}>
             <Navbar theme={theme} setTheme={setTheme} hideOnFooter={isFooterVisible} />
-            <div className={` bg-fuchsia-400/10 dark:bg-fuchsia-400/30 w-1/6 blur-3xl top-16  h-[60vh] overflow-hidden opacity-65 brightness-50 rounded-3xl inset-x-0 mx-auto  absolute  z-0 rotate-45`}></div>
-            <div className={` max-sm:hidden dark:bg-blue-400/30 bg-indigo-500/10  blur-3xl   w-1/6 top-16  h-[80vh] overflow-hidden opacity-65 brightness-50 rounded-3xl inset-x-0 mx-auto left-1/4 lg:left-2/4  absolute  z-0 rotate-45`}></div>
             <div className='grid pb-24 md:pb-16 lg:pb-0 grid-cols-1 md:grid-cols-2 w-5/6 h-full items-center gap-6 relative z-10 top-14 lg:top-6 '>
                 <div className='py-6 md:ml-2 '  >
                     <div className='flex items-center gap-2 mb-5'   >
@@ -114,6 +113,8 @@ const Tutorpage: React.FC<TutorpageProps> = ({ theme, setTheme }) => {
                 </div> 
           </div>
       </div>
+        <div className={`${theme === 'dark' ? '' : 'hidden'}    bg-blue-600 opacity-40 brightness-70 blur-3xl absolute top-20 right-2/6 md:right-5/6 rounded-3xl z-0 w-30 h-[80vh] rotate-160 md:rotate-150 lg:rotate-135`}></div>
+          <div className={`${theme === 'dark' ? '' : 'hidden'}  max-sm:hidden bg-fuchsia-600 opacity-40 blur-3xl brightness-70 absolute top-14 right-2/6 rounded-3xl z-0 w-30 h-[80vh] rotate-160 md:rotate-150 lg:rotate-135 `}></div>
 
       <div data-animate className='bg-slate-50 dark:bg-slate-800/40  '>
         <div className='grid grid-cols-1 md:grid-cols-2 relative gap-16 w-4/5 mx-auto py-12 '>
@@ -126,10 +127,10 @@ const Tutorpage: React.FC<TutorpageProps> = ({ theme, setTheme }) => {
               <img src={assets.man1}alt=""className="w-full h-full object-cover rounded-lg"/>
             </div>
             <div className='row-start-4 shadow-lg row-span-2 ' >
-              <img src={assets.female3}alt=""className="w-full h-full object-cover rounded-lg"/>
+              <img src={assets.female3}alt=""className="w-full h-full object-cover bg-top rounded-lg"/>
           </div>
           <div className="row-start-1 col-start-2 shadow-lg row-span-2 ">
-            <img src={assets.man3}alt=""className="w-full h-full object-cover rounded-lg"/>
+            <img src={assets.man3}alt=""className="w-full h-full object-cover bg-top rounded-lg"/>
           </div>
           <div className="row-span-3 row-start-3 shadow-lg col-start-2">
             <img src={assets.female4}alt=""className="w-full h-full object-cover rounded-lg"/>
@@ -138,7 +139,7 @@ const Tutorpage: React.FC<TutorpageProps> = ({ theme, setTheme }) => {
         </div>
       </div>
 
-      <div className='w-full py-6 md:py-12 '>
+      <div className='w-full py-6 md:py-10 '>
           <div className="relative z-10 mx-auto px-7 w-5/6 grid grid-cols-1 md:grid-cols-2 gap-6 py-5">
             <div className='flex-col justify-center items-center'>
               <div className='bg-green-50 dark:bg-green-300/10  py-1 pl-1 pr-6 rounded-full flex  justify-start items-center gap-2  border-1 border-green-200/70 dark:border-green-500/20 '>
@@ -172,7 +173,7 @@ const Tutorpage: React.FC<TutorpageProps> = ({ theme, setTheme }) => {
       <div data-animate className='bg-slate-50  dark:bg-slate-800/40   '>
           <div className='grid grid-cols-1 md:grid-cols-2 relative gap-8 md:gap-16 w-4/5 mx-auto py-12 '>
             <div className='flex-col gap-2 justify-center content-start w-full h-full '>
-              <div className='ring-1 mb-3 ring-rose-300 dark:ring-rose-500/50  w-48 rounded-full flex  justify-start items-center gap-0.5 py-0.5 pl-0.5 pr-2  dark:bg-rose-400/10 bg-rose-50 '>
+              <div className='ring-1 mb-3 ring-rose-300 dark:ring-rose-500/40  w-48 rounded-full flex  justify-start items-center gap-0.5 py-0.5 pl-0.5 pr-2  dark:bg-rose-400/10 bg-rose-50 '>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-rose-800 dark:text-white">
                   <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
                 </svg>
@@ -190,31 +191,31 @@ const Tutorpage: React.FC<TutorpageProps> = ({ theme, setTheme }) => {
             <div className='font-bold text-white text-xl mb-3'>Benefits</div>
             <div className='flex flex-col pl-4 justify-start gap-2'>
               <div className='flex gap-2 '>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-rose-600">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-orange-600">
                 <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
               </svg>
               <span className='text-white'>Expand your audience and increase your earning potential</span>
               </div>
               <div className='flex gap-2 '>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-rose-600">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-orange-600">
                 <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
               </svg>
               <span className='text-white'>Turn your teaching expertise into a reliable source of income.</span>
               </div>
               <div className='flex gap-2 '>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-rose-600">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-orange-600">
                 <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
               </svg>
               <span className='text-white'>Connect with learners across Nigeria and beyond.</span>
               </div>
                <div className='flex gap-2 '>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-rose-600">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-orange-600">
                 <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
               </svg>
               <span className='text-white'>Enjoy the freedom to teach on your own schedule.</span>
               </div>
               <div className='flex gap-2 justify-start items-start h-full '>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-rose-600">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-orange-600">
                 <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
               </svg>
               <span className='text-white '> Empower students to achieve academic excellence in future.</span>

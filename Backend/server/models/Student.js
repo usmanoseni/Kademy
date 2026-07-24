@@ -62,6 +62,11 @@ const StudentSchema = new mongoose.Schema({
         },
         default: null
     },
+    school_name: {
+        type: String,
+        trim: true,
+        default: null
+    },
     completeRegistration: {
         type: Boolean,
         default: false
