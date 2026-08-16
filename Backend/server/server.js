@@ -14,6 +14,8 @@ const studentRouter = require('./router/studentsRouther');
 const contentRouter = require('./router/contentRouter');
 const commentRouter = require('./router/commentRouter');
 const QualificationRouter = require('./router/qualificationRouter');    
+const studentMailRouter = require('./router/studentMailRouter')
+
 
 //load env variables
 dotenv.config();
@@ -42,6 +44,7 @@ app.use('/api/students', studentRouter);
 app.use('/api/contents', contentRouter);
 app.use('/api/comments', commentRouter);
 app.use('/api/qualifications', QualificationRouter);
+app.use('/api', studentMailRouter);
 
 
 //Root route

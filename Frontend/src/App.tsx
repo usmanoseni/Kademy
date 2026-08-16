@@ -8,6 +8,7 @@ import SignUpPage from './Auth/StudentAuth/SignUpPage'
 import Dashbord from './Students/dashboard';
 import ResetPassword from './Auth/StudentAuth/ResetPassword'
 import VerifyEmail from './Auth/StudentAuth/VerifyEmail';
+import { Toaster } from "sonner";
 
 function App() {
   const [theme, setTheme] = useState<string>(() => {
@@ -21,7 +22,9 @@ function App() {
   }, [theme]);
 
   return (
-    <Routes>
+    <>
+      <Toaster richColors position="top-center" />
+       <Routes>
       <Route path="/" element={<Landingpage theme={theme} setTheme={setTheme} />} />
       <Route path="/student" element={<Studentpage theme={theme} setTheme={setTheme} />} />
       <Route path="/tutor" element={<Tutorpage theme={theme} setTheme={setTheme} />} />
@@ -31,6 +34,8 @@ function App() {
       <Route path="/auth/student/register" element={<SignUpPage  />} />
       <Route path="/student/dashboard" element={<Dashbord />} />
     </Routes>
+     </>
+   
   );
 }
 

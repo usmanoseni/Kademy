@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { StudentAuth } from '../../client/server/api';
 import { useNavigate } from 'react-router-dom';
 import { LoaderCircle } from "lucide-react";
+import { toast } from "sonner";
 
 type StudentLoginProps = {
   theme: string;
@@ -98,7 +99,7 @@ const LoginPage: React.FC <StudentLoginProps > = ({ theme }) => {
         const res = await StudentAuth.login({email: form.email.trim(), password: form.password});
         if (res.user) {
             localStorage.setItem("user", JSON.stringify(res.user));
-            setSuccess("Login successful! ");
+            toast.success("Login successful! ");
             setTimeout(() => navigate("/student/dashboard", { replace: true }), 1200);
         } else {
             setError("Incorrect email or password");
@@ -155,11 +156,7 @@ const LoginPage: React.FC <StudentLoginProps > = ({ theme }) => {
                                     {error}
                                 </p>
                             )}
-                            {success && (
-                                <p role="status" className="mt-2 rounded-md bg-green-100 px-3 py-2 text-sm text-green-700 dark:bg-green-900/40 dark:text-green-300">
-                                    {success}
-                                </p>
-                            )}
+                           
                             <form onSubmit={submit}  className='mt-4'>
                                 <label >
                                     <span className="after:content-['*'] dark:text-slate-200 after:text-red-400 after:ml-0.5 text-sm font-medium  text-gray-800 datk:text-gray-300">Email</span>

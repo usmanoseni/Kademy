@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { StudentAuth } from '../../client/server/api';
 import { LoaderCircle } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import { toast } from "sonner";
 
 type VerifyEmailProps = {
   theme: string;
@@ -18,7 +19,6 @@ const VerifyEmail: React.FC <VerifyEmailProps > = ({ theme }) => {
     const [form, setForm] = useState({ email: ""});
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-    const [otp, setOtp] = useState(false)
     const navigate = useNavigate();
 
     function update (event: React.ChangeEvent<HTMLInputElement>) {
@@ -40,8 +40,10 @@ const VerifyEmail: React.FC <VerifyEmailProps > = ({ theme }) => {
 
             const res = await StudentAuth.verifyEmail(email);
             if (res.success && res.student) {
-                localStorage.setItem("verifyEmail", form.email.trim());
-                setSuccess("successful! ");
+                await StudentAuth.requestPasswordResetOtp(email);
+                localStorage.setItem("verifyEmail", email);
+                localStorage.setItem("otpRequestedAt", Date.now().toString());
+                toast.success("Sucessful");
                    setTimeout(() => navigate("/auth/student/reset-password", { replace: true }), 1200); 
             } else {
                 setError("Email not found");
@@ -66,20 +68,8 @@ const VerifyEmail: React.FC <VerifyEmailProps > = ({ theme }) => {
                 <div className={`${theme === 'dark' ? '' : 'hidden'} max-sm:hidden  bg-fuchsia-600 opacity-40 brightness-70 blur-3xl absolute top-0 right-2/6 rounded-3xl z-0 w-30 h-full rotate-160 md:rotate-150 lg:rotate-135`}></div>
                 <div className={`${theme === 'dark' ? '' : 'hidden'}   bg-blue-600 opacity-40 blur-3xl brightness-70 absolute top-0 right-4/6 rounded-3xl z-0 w-30 h-full rotate-160 md:rotate-150 lg:rotate-135 `}></div>
 
-                <div className='bg-white flex z-30 rounded-3xl max-w-[26rem] mx-2.5 my-auto  overflow-hidden dark:bg-slate-900/90 shadow-2xl shadow-slate-200 dark:shadow-slate-800'>
+                <div className='bg-white flex z-30 rounded-3xl w-[26rem] mx-2.5 my-auto  overflow-hidden dark:bg-slate-900/90 shadow-2xl shadow-slate-200 dark:shadow-slate-800'>
                     <div className='flex-1 p-6'>
-                        {success && (
-                           <div className='flex justify-center items-center my-2'>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-9 text-green-600">
-                            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
-                            </svg>
-                            <p className="text-slate-600 dark:text-slate-300 font-semibold">
-                            {success}
-                        </p>
-                        </div>
-                        )}
-                        
-                        
                         <div className=' flex  items-center justify-center pb-5 text-center text-gray-800 dark:text-gray-300 gap-1'>
                             <img src={theme ==='dark' ? assets.dark_logo :assets.logo} className='size-8' alt="" />
                             <div className='font-goldman font-semibold text-lg dark:text-white'>Kademy</div>
@@ -94,7 +84,12 @@ const VerifyEmail: React.FC <VerifyEmailProps > = ({ theme }) => {
                                     {error}
                                 </p>
                             )}
-                                 <form onSubmit={check} className='mt-4'>
+                             {success && (
+                                <p role="status" className="mt-2 rounded-md bg-green-100 px-3 py-2 text-sm text-green-700 dark:bg-green-900/40 dark:text-green-300">
+                                    {success}
+                                </p>
+                            )}
+                            <form onSubmit={check} className='mt-4'>
                                 <label >
                                     <span className="after:content-['*'] dark:text-slate-200 after:text-red-400 after:ml-0.5 text-sm font-medium  text-gray-800 datk:text-gray-300">Email</span>
                                     <div className="relative mb-3">
@@ -119,7 +114,6 @@ const VerifyEmail: React.FC <VerifyEmailProps > = ({ theme }) => {
                 </div>
                 <div className="absolute  bottom-0 py-6 z-40  text-center text-xs lg:text-sm text-gray-400 dark:text-slate-500">   © {new Date().getFullYear()} Kademy E-Learning Platform. All rights reserved. Designed by HusTech</div>
             </div>
-           
         </div>
            
     )

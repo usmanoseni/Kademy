@@ -4,6 +4,9 @@ const fetch = global.fetch || require('node-fetch');
 const student = require('../models/Student');
 const tutor = require('../models/Tutor');
 const hash_password = require('../middleware/utlis/hashPassword');
+const Mail = require('../mail/mail');
+const { render } = require('@react-email/render');
+const StudentOtpEmail = require('../mail/students/StudentOtpEmail');
 require('dotenv').config();
 const router = express.Router();
 
@@ -135,7 +138,7 @@ const createSocialStudent = async (profile, provider) => {
 // Login route for students 
 router.post('/auth/student/login', async (req, res, next) => { 
     try {
-        const { email, password } = req.body; 
+        const { email, otp, password } = req.body;
         if (!email || !password) {
             return sendErrorResponse(res, 400, 'Please enter both your email and password.');
         }
@@ -277,46 +280,45 @@ router.post('/auth/tutor/register', async (req, res, next) => {
     }
 });
 
-//post Otp api for student 
-router.post('/auth/student', async (req, res, next) => {
+//update password
+router.patch('/auth/student/reset-password', async (req, res, next) => { 
     try {
-        const { email } = req.body;
-        
-        const user = await student.findOne({ email: email });
-        if (!user) {
-            return res.status(400).json({ msg: "User with this email does not exist" });
+        const { email, password } = req.body;
+        if (!email || !password || password.length < 6) {
+            return res.status(400).json({ msg: 'Provide your email, six-digit OTP, and a password with at least 6 characters.' });
         }
-        const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        const otpTime = new Date(Date.now() + 10 * 60 * 1000); // OTP valid for 10 minutes
-        user.resetOtp = otp;
-        user.otpExpired = otpTime;
-        await user.save();
-        res.status(200).json({ msg: "OTP sent successfully", otp }); // In real application, send OTP via email
-    }
-    catch (err) {
-        next(err)
-    }
-        
-});
-
-//get Otp api for student
-router.post('/auth/student/reset-password', async (req, res, next) => { 
-    try {
-        const { email, otp, password } = req.body;
-        const user = await student.findOne({ email: email });
-        if (!user || user.resetOtp !== otp || user.otpExpired < new Date()) {
+        const user = await findUserByEmail(student, email);
+        if (!user || !user.resetOtp) {
             return res.status(400).json({ msg: "Invalid or expired OTP" });
         }
         const hashedPassword = await hash_password.hashpassword(password);
         user.password = hashedPassword;
         user.resetOtp = null;
         user.otpExpired = null;
+        
         await user.save();
-        res.status(200).json({ msg: "Password updated successfully" });
+        return res.status(200).json({ success: true, msg: 'Password updated successfully' });
     } catch (err) {
         next(err);      
     }
 });
+
+//verify opt for student
+router.post('/student/verifyOtp', async (req, res, next) => {
+    try{
+        const { email, otp } = req.body;
+        if (!email || !/^\d{6}$/.test(String(otp))) {
+            return res.status(400).json({ msg: 'Provide your email, six-digit OTP.' });
+        }
+        const user = await findUserByEmail(student, email);
+        if (!user || user.resetOtp !== String(otp) || !user.otpExpired || user.otpExpired <= new Date()) {
+            return res.status(400).json({ msg: "Invalid or expired OTP" });
+        }
+        return res.status(200).json({ success: true, msg: "OTP verified successfully" });
+    } catch (err) {
+        next(err);      
+    }
+} )
 
 //post Otp api for tutor
 router.post('/auth/tutor', async (req, res, next) => {
@@ -328,7 +330,7 @@ router.post('/auth/tutor', async (req, res, next) => {
             return res.status(400).json({ msg: "User with this email does not exist" });
         }
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        const otpTime = new Date(Date.now() + 10 * 60 * 1000); // OTP valid for 10 minutes
+        const otpTime = new Date(Date.now() + 5 * 60 * 1000); // OTP valid for 5 minutes
         user.resetOtp = otp;
         user.otpExpired = otpTime;
         await user.save();
@@ -405,31 +407,6 @@ router.get('/auth/verify', (req, res, next) => {
     }
 });
 
-//verify student email
-// router.post('/auth/student/verify-email', async (req, res, next) => {
-//     try {
-//         const { email } = req.body;
-
-//         if (!email) {
-//             return res.status(400).json({message: "Email is required.",});
-//         }
-
-//         const student = await Student.findOne({email: email.trim(), });
-
-//         if (!student) {
-//             return res.status(404).json({message: "No account found with this email.",});
-//         }
-
-//         return res.status(200).json({
-//             success: true,
-//             message: "Email found.",
-//             student: { email: student.email }
-//         });
-
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).json({ message: "Internal Server Error." })
-//     }})
 router.post('/auth/student/verify-email', async (req, res, next) => {
   try {
     const email = normalizeEmail(req.body.email);

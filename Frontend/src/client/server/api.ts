@@ -71,6 +71,20 @@ export const StudentAuth = {
   verifyEmail: async (email: string) => {
     const response = await api.post("/auth/student/verify-email", { email });
     return response.data;
+  },
+
+  requestPasswordResetOtp: async (email: string) => {
+    const response = await api.post('/auth/student', { email });
+    return response.data;
+  },
+
+  resetPassword: async (email: string, password: string) => {
+    const response = await api.patch('/auth/student/reset-password', { email, password });
+    return response.data;
+  },
+  verifyOtp: async (email: string, otp: string,) => {
+    const response = await api.post('/student/verifyOtp', { email, otp });
+    return response.data;
   }
 }
 
